@@ -224,3 +224,206 @@ CARDS.extend([
         "art": "volcano"
     }
 ])
+
+BRIEFS = [
+    {
+        'n': 1,
+        'place': 'Brussels',
+        'text': 'EU plans a sports ban in a sweeping new Russia sanctions package.',
+        'source': 'Brussels',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 2,
+        'place': 'Riga',
+        'text': "Latvia's new government promises curbs on Russian in public venues.",
+        'source': 'Riga',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 3,
+        'place': 'Helsinki',
+        'text': "Finland summons the Russian ambassador over 'reckless' actions in Europe.",
+        'source': 'Helsinki',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 4,
+        'place': 'Paris',
+        'text': 'France criticises the Poland airspace breach and backs Denmark over a Russian plot claim.',
+        'source': 'Paris',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 5,
+        'place': 'Moscow',
+        'text': "Russia summons Estonia's chargé d'affaires over the border closure and arson claim.",
+        'source': 'Moscow',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 6,
+        'place': 'Yerevan',
+        'text': 'Armenia begins practical work on the Trump Route TRIPP in Syunik Province.',
+        'source': 'Yerevan',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 7,
+        'place': 'Manchester',
+        'text': "Burnham's 10-year plan puts No 10 North under greater scrutiny.",
+        'source': 'Manchester',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 8,
+        'place': 'London',
+        'text': 'A benefits review will suggest quicker payments for some disabled people.',
+        'source': 'London',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 9,
+        'place': 'London',
+        'text': 'Don Toliver postpones his London O2 show to 15 December after the Manchester evacuation.',
+        'source': 'London',
+        'tag': '',
+        'region': 'EUROPE'
+    },
+    {
+        'n': 10,
+        'place': 'Washington',
+        'text': 'The FAA pauses installation of routers linked to the nationwide ground stop.',
+        'source': 'Washington',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 11,
+        'place': 'Columbus',
+        'text': 'Two bus drivers are killed and nine hurt as two transit buses collide in Ohio.',
+        'source': 'Columbus',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 12,
+        'place': 'Washington',
+        'text': "The House Ethics Committee finds 'substantial evidence' against Rep. Jimmy Gomez.",
+        'source': 'Washington',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 13,
+        'place': 'Palm Springs',
+        'text': 'Singer Miley Cyrus marries rock drummer Maxx Morando in an intimate ceremony.',
+        'source': 'Palm Springs',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 14,
+        'place': 'Los Angeles',
+        'text': 'David Beckham sues for $41m after his fragrance is sold in discount stores.',
+        'source': 'Los Angeles',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 15,
+        'place': 'Mexico City',
+        'text': "Alleged drug lord 'El Chapo Isidro' is to be tried in Mexico, an official says.",
+        'source': 'Mexico City',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 16,
+        'place': 'Washington',
+        'text': '74% of US Latinos say they have seen or heard ICE activity in their area.',
+        'source': 'Washington',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 17,
+        'place': 'New York',
+        'text': 'Meta pauses its Class C share issuance amid a shareholder lawsuit.',
+        'source': 'New York',
+        'tag': '',
+        'region': 'THE AMERICAS'
+    },
+    {
+        'n': 18,
+        'place': 'Cairo',
+        'text': "Iraq's prime minister arrives in Egypt on his first official visit since taking office.",
+        'source': 'Cairo',
+        'tag': '',
+        'region': 'MIDDLE EAST'
+    },
+    {
+        'n': 19,
+        'place': 'Ankara',
+        'text': 'Turkey and Egypt discuss economic ties and de-escalation in a phone call.',
+        'source': 'Ankara',
+        'tag': '',
+        'region': 'MIDDLE EAST'
+    },
+    {
+        'n': 20,
+        'place': 'Beirut',
+        'text': "Lebanon condemns an Israeli military official's visit to a schoolhouse in the south.",
+        'source': 'Beirut',
+        'tag': '',
+        'region': 'MIDDLE EAST'
+    },
+    {
+        'n': 21,
+        'place': 'Tehran',
+        'text': "Iran's army says it shot down a US Lucas drone over the Gulf.",
+        'source': 'Tehran',
+        'tag': 'CLAIM',
+        'region': 'MIDDLE EAST'
+    },
+    {
+        'n': 22,
+        'place': 'Tehran',
+        'text': 'Iran threatens EU military bases with missiles it says can reach 4,500km.',
+        'source': 'Tehran',
+        'tag': 'CLAIM',
+        'region': 'MIDDLE EAST'
+    },
+    {
+        'n': 23,
+        'place': 'Washington',
+        'text': 'Trump is likely to renew strikes on Iran after the New Year if no deal is reached.',
+        'source': 'Washington',
+        'tag': 'CLAIM',
+        'region': 'MIDDLE EAST'
+    },
+    {
+        'n': 24,
+        'place': 'Gaza',
+        'text': "Israeli bombardment has turned Gaza into a 'toxic wasteland', new research finds.",
+        'source': 'Gaza',
+        'tag': '',
+        'region': 'MIDDLE EAST'
+    },
+    {
+        'n': 25,
+        'place': 'Bangkok',
+        'text': 'Protesters march 16km to a Bangchak refinery demanding lower refining margins.',
+        'source': 'Bangkok',
+        'tag': '',
+        'region': 'ASIA-PACIFIC'
+    },
+]
