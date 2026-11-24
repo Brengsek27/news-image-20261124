@@ -174,10 +174,29 @@ def draw_lead_card(page):
     y += 4
     y = page.text((48, y), f"{c['source'].upper()} • {c['tag'].upper()}", font=f_src, fill=GOLD)
 
+from stories import STATS
+
+def draw_stats_strip(page):
+    page.card_surface(32, 252, 992, 298, fill=CHARCOAL_2)
+    f_lbl = load_font('sans', 9)
+    f_val13 = load_font('serif_regular', 13)
+    f_val11 = load_font('serif_regular', 11)
+    for i, item in enumerate(STATS):
+        cx = 32 + i * 160 + 6
+        lbl = str(item['label']).upper()
+        val = str(item['value'])
+        y_lbl_end = page.text((cx, 254), lbl, f_lbl, GOLD, max_width=148, spacing=1)
+        b_before = len(page.boxes)
+        y_end = page.text((cx, y_lbl_end + 1), val, f_val13, IVORY, max_width=148, spacing=1)
+        if len(page.boxes) - b_before > 2 or y_end > 297:
+            del page.boxes[b_before:]
+            page.text((cx, y_lbl_end + 1), val, f_val11, IVORY, max_width=148, spacing=1)
+
 def main():
     page = Page()
     draw_masthead(page)
     draw_lead_card(page)
+    draw_stats_strip(page)
     self_check(page)
     page.img.save('/home/hatch/workspace/makefun/entries/news-image-20261124-r1/entry.png')
     print("entry.png saved successfully.")
