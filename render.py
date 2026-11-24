@@ -277,7 +277,30 @@ def draw_cards_zone(page):
     for idx, card in enumerate(stories.CARDS[1:]):
         row = idx // 2
         col = idx % 2
-        draw_card(page, card, 32 + col * (476 + 8), 298 + row * (36 + 8), 476, 36)
+        draw_card(page, card, 32 + col * (476 + 8), 298 + row * 36, 476, 36)
+
+def draw_timeline_band(page):
+    band_y0, band_y1 = 664, 700
+    col_width = 100
+    for i, beat in enumerate(stories.TIMELINE):
+        x = 32 + i * col_width
+        part_font = load_font('serif_bold', 7)
+        text_font = load_font('sans', 7)
+        page.text((x, 666), beat['part'].upper(), part_font, GOLD, max_width=94)
+        page.text((x, 678), beat['text'], text_font, INK, max_width=94)
+
+def draw_briefs_zone(page):
+    zone_y0, zone_y1 = 704, 942
+    cell_width = 476
+    pitch = 9.52
+    for i, brief in enumerate(stories.BRIEFS):
+        row = i % 25
+        col = 0 if i < 25 else 1
+        x = 32 + col * cell_width
+        y = zone_y0 + row * pitch
+        text_str = f"{brief['n']}. {brief['place'].upper()} - {brief['text']}"
+        font = load_font('sans', 7)
+        page.text((x, y), text_str, font, INK, max_width=cell_width-16)
 
 def main():
     page = Page()
@@ -285,6 +308,8 @@ def main():
     draw_lead_card(page)
     draw_stats_strip(page)
     draw_cards_zone(page)
+    draw_timeline_band(page)
+    draw_briefs_zone(page)
     self_check(page)
     page.img.save('/home/hatch/workspace/makefun/entries/news-image-20261124-r1/entry.png')
     print("entry.png saved successfully.")
