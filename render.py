@@ -192,6 +192,74 @@ def draw_stats_strip(page):
             del page.boxes[b_before:]
             page.text((cx, y_lbl_end + 1), val, f_val11, IVORY, max_width=148, spacing=1)
 
+def draw_glyph(page, art, cx, cy, s, colour):
+    if art == 'flame':
+        page.ellipse((cx - s*0.4, cy - s*0.6, cx + s*0.4, cy + s*0.6), fill=colour)
+        page.ellipse((cx - s*0.25, cy - s*0.4, cx + s*0.25, cy + s*0.5), fill=colour)
+        page.ellipse((cx - s*0.12, cy - s*0.2, cx + s*0.12, cy + s*0.4), fill=colour)
+    elif art == 'missile':
+        page.polygon([(cx, cy - s*0.5), (cx - s*0.25, cy + s*0.5), (cx + s*0.25, cy + s*0.5)], fill=colour)
+        page.rectangle((cx - s*0.1, cy + s*0.3, cx + s*0.1, cy + s*0.6), fill=colour)
+    elif art == 'jet':
+        page.polygon([(cx, cy - s*0.5), (cx - s*0.5, cy + s*0.4), (cx + s*0.5, cy + s*0.4)], fill=colour)
+    elif art == 'chart':
+        w = s * 0.25
+        page.rectangle((cx - s*0.5, cy + s*0.1, cx - s*0.5 + w, cy + s*0.5), fill=colour)
+        page.rectangle((cx - s*0.12, cy - s*0.1, cx - s*0.12 + w, cy + s*0.5), fill=colour)
+        page.rectangle((cx + s*0.25, cy - s*0.3, cx + s*0.25 + w, cy + s*0.5), fill=colour)
+    elif art == 'ball':
+        page.ellipse((cx - s*0.4, cy - s*0.4, cx + s*0.4, cy + s*0.4), outline=colour, width=2)
+        page.line((cx - s*0.3, cy - s*0.3, cx + s*0.3, cy + s*0.3), fill=colour, width=1)
+    elif art == 'scales':
+        page.line((cx, cy - s*0.5, cx, cy + s*0.5), fill=colour, width=2)
+        page.polygon([(cx - s*0.4, cy - s*0.2), (cx - s*0.2, cy - s*0.4), (cx - s*0.6, cy - s*0.4)], fill=colour)
+        page.polygon([(cx + s*0.4, cy - s*0.2), (cx + s*0.2, cy - s*0.4), (cx + s*0.6, cy - s*0.4)], fill=colour)
+    elif art == 'fire':
+        page.ellipse((cx - s*0.4, cy - s*0.4, cx + s*0.4, cy + s*0.4), fill=colour)
+        page.ellipse((cx - s*0.2, cy - s*0.2, cx + s*0.2, cy + s*0.2), fill=colour)
+    elif art == 'vote':
+        page.polygon([(cx - s*0.4, cy), (cx - s*0.1, cy + s*0.3), (cx + s*0.4, cy - s*0.3)], outline=colour, width=2)
+    elif art == 'gavel':
+        page.rectangle((cx - s*0.4, cy - s*0.2, cx + s*0.4, cy + s*0.1), fill=colour)
+        page.line((cx - s*0.1, cy + s*0.1, cx + s*0.4, cy + s*0.5), fill=colour, width=2)
+    elif art == 'ship':
+        page.polygon([(cx - s*0.5, cy + s*0.2), (cx + s*0.5, cy + s*0.2), (cx + s*0.3, cy + s*0.5), (cx - s*0.3, cy + s*0.5)], fill=colour)
+        page.line((cx, cy + s*0.2, cx, cy - s*0.5), fill=colour, width=2)
+    elif art == 'flag':
+        page.line((cx - s*0.3, cy - s*0.5, cx - s*0.3, cy + s*0.5), fill=colour, width=2)
+        page.rectangle((cx - s*0.3, cy - s*0.5, cx + s*0.3, cy - s*0.1), fill=colour)
+    elif art == 'summit':
+        page.polygon([(cx, cy - s*0.5), (cx - s*0.5, cy + s*0.4), (cx + s*0.1, cy + s*0.4)], fill=colour)
+        page.polygon([(cx + s*0.2, cy - s*0.2), (cx - s*0.1, cy + s*0.4), (cx + s*0.5, cy + s*0.4)], fill=colour)
+    elif art == 'bat':
+        page.ellipse((cx - s*0.2, cy - s*0.2, cx + s*0.2, cy + s*0.2), fill=colour)
+        page.polygon([(cx - s*0.2, cy), (cx - s*0.6, cy - s*0.3), (cx - s*0.2, cy + s*0.2)], fill=colour)
+        page.polygon([(cx + s*0.2, cy), (cx + s*0.6, cy - s*0.3), (cx + s*0.2, cy + s*0.2)], fill=colour)
+    elif art == 'chip':
+        page.rectangle((cx - s*0.3, cy - s*0.3, cx + s*0.3, cy + s*0.3), fill=colour)
+        page.line((cx - s*0.5, cy - s*0.15, cx - s*0.3, cy - s*0.15), fill=colour, width=1)
+        page.line((cx - s*0.5, cy + s*0.15, cx - s*0.3, cy + s*0.15), fill=colour, width=1)
+        page.line((cx + s*0.3, cy - s*0.15, cx + s*0.5, cy - s*0.15), fill=colour, width=1)
+        page.line((cx + s*0.3, cy + s*0.15, cx + s*0.5, cy + s*0.15), fill=colour, width=1)
+    elif art == 'drone':
+        page.ellipse((cx - s*0.2, cy - s*0.2, cx + s*0.2, cy + s*0.2), fill=colour)
+        page.line((cx - s*0.5, cy - s*0.5, cx + s*0.5, cy + s*0.5), fill=colour, width=1)
+        page.line((cx - s*0.5, cy + s*0.5, cx + s*0.5, cy - s*0.5), fill=colour, width=1)
+        page.ellipse((cx - s*0.55, cy - s*0.55, cx - s*0.45, cy - s*0.45), fill=colour)
+        page.ellipse((cx + s*0.45, cy - s*0.55, cx + s*0.55, cy - s*0.45), fill=colour)
+        page.ellipse((cx - s*0.55, cy + s*0.45, cx - s*0.45, cy + s*0.55), fill=colour)
+        page.ellipse((cx + s*0.45, cy + s*0.45, cx + s*0.55, cy + s*0.55), fill=colour)
+    elif art == 'cross':
+        page.rectangle((cx - s*0.15, cy - s*0.5, cx + s*0.15, cy + s*0.5), fill=colour)
+        page.rectangle((cx - s*0.5, cy - s*0.15, cx + s*0.5, cy + s*0.15), fill=colour)
+    elif art == 'volcano':
+        page.polygon([(cx - s*0.5, cy + s*0.5), (cx + s*0.5, cy + s*0.5), (cx + s*0.2, cy - s*0.3), (cx - s*0.2, cy - s*0.3)], fill=colour)
+        page.ellipse((cx - s*0.1, cy - s*0.4, cx - s*0.05, cy - s*0.35), fill=colour)
+        page.ellipse((cx, cy - s*0.45, cx + s*0.05, cy - s*0.4), fill=colour)
+        page.ellipse((cx + s*0.05, cy - s*0.4, cx + s*0.1, cy - s*0.35), fill=colour)
+    else:
+        page.ellipse((cx - s*0.4, cy - s*0.4, cx + s*0.4, cy + s*0.4), fill=colour)
+
 def main():
     page = Page()
     draw_masthead(page)
