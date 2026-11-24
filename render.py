@@ -260,11 +260,31 @@ def draw_glyph(page, art, cx, cy, s, colour):
     else:
         page.draw.ellipse((cx - s*0.4, cy - s*0.4, cx + s*0.4, cy + s*0.4), fill=colour)
 
+def draw_card(page, card, x0, y0, w, h):
+    page.card_surface(x0, y0, x0 + w, y0 + h, CREAM)
+    page.card_outline(x0, y0, x0 + w, y0 + h, CHARCOAL_2, width=1)
+    rc = region_colour(card['region'])
+    page.card_surface(x0, y0, x0 + 3, y0 + h, rc)
+    meta = f"{card['place']}  //  {card['topic']}".upper()
+    font_meta = load_font('sans', 8)
+    page.text((x0 + 10, y0 + 3), meta, font_meta, GOLD, max_width=w - 44)
+    font_head = load_font('serif_bold', 10)
+    page.text((x0 + 10, y0 + 14), card['headline'], font_head, INK, max_width=w - 44)
+    draw_glyph(page, card['art'], x0 + w - 20, y0 + h // 2, 16, rc)
+
+def draw_cards_zone(page):
+    import stories
+    for idx, card in enumerate(stories.CARDS[1:]):
+        row = idx // 2
+        col = idx % 2
+        draw_card(page, card, 32 + col * (476 + 8), 298 + row * (36 + 8), 476, 36)
+
 def main():
     page = Page()
     draw_masthead(page)
     draw_lead_card(page)
     draw_stats_strip(page)
+    draw_cards_zone(page)
     self_check(page)
     page.img.save('/home/hatch/workspace/makefun/entries/news-image-20261124-r1/entry.png')
     print("entry.png saved successfully.")
