@@ -148,9 +148,36 @@ def draw_masthead(page):
     page.text((32, y_after_title + 2), sub_text, sans_font, MUTED, max_width=960)
     page.card_surface(32, 89, 992, 91, GOLD)
 
+def draw_lead_card(page):
+    import stories
+    c = stories.CARDS[0]
+    page.card_surface(32, 92, 992, 252, CHARCOAL_1)
+    reg_col = region_colour(c.get('region', 'MIDDLE EAST'))
+    page.draw.rectangle([32, 92, 36, 252], fill=reg_col)
+    page.draw.ellipse([948, 150, 972, 195], fill=GOLD)
+    page.draw.ellipse([952, 138, 968, 180], fill=GOLD)
+    page.draw.ellipse([955, 160, 965, 188], fill=IVORY)
+    f_meta = load_font('sans', 11)
+    f_head = load_font('serif_bold', 30)
+    f_deck = load_font('sans', 13)
+    f_src = load_font('sans', 11)
+    place_topic = f"{c['place'].upper()} • {c['topic'].upper()}"
+    headline = c['headline']
+    if page.draw.textbbox((0, 0), headline, font=f_head)[2] > 860:
+        f_head = load_font('serif_bold', 24)
+    y = 100
+    y = page.text((48, y), place_topic, font=f_meta, fill=GOLD)
+    y += 4
+    y = page.text((48, y), headline, font=f_head, fill=CREAM)
+    y += 4
+    y = page.text((48, y), c['deck'], font=f_deck, fill=CREAM, max_width=760)
+    y += 4
+    y = page.text((48, y), f"{c['source'].upper()} • {c['tag'].upper()}", font=f_src, fill=GOLD)
+
 def main():
     page = Page()
     draw_masthead(page)
+    draw_lead_card(page)
     self_check(page)
     page.img.save('/home/hatch/workspace/makefun/entries/news-image-20261124-r1/entry.png')
     print("entry.png saved successfully.")
