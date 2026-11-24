@@ -124,8 +124,33 @@ def self_check(page):
                 if not (a_in_b or b_in_a):
                     raise ValueError(f"Text box collision between box {i} {page.boxes[i]} and box {j} {page.boxes[j]}")
 
+import stories
+
+def draw_masthead(page):
+    title_text = stories.META['title']
+    date_line = stories.META['date_line']
+    edition = stories.META['edition']
+    
+    chosen_size = 40
+    for sz in range(40, 9, -1):
+        font = load_font('serif_bold', sz)
+        dummy = Page()
+        y_end = dummy.text((32, 6), title_text, font, INK, max_width=960)
+        if len(dummy.boxes) <= 2 and y_end + 18 <= 88:
+            chosen_size = sz
+            break
+            
+    title_font = load_font('serif_bold', chosen_size)
+    y_after_title = page.text((32, 6), title_text, title_font, INK, max_width=960)
+    
+    sans_font = load_font('sans', 11)
+    sub_text = f"{date_line}   ·   {edition}"
+    page.text((32, y_after_title + 2), sub_text, sans_font, MUTED, max_width=960)
+    page.card_surface(32, 89, 992, 91, GOLD)
+
 def main():
     page = Page()
+    draw_masthead(page)
     self_check(page)
     page.img.save('/home/hatch/workspace/makefun/entries/news-image-20261124-r1/entry.png')
     print("entry.png saved successfully.")
