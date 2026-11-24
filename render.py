@@ -1,0 +1,134 @@
+import os
+import sys
+from PIL import Image, ImageDraw, ImageFont
+import stories
+
+# Design Tokens
+CREAM = '#f3ecde'
+CHARCOAL_1 = '#292722'
+CHARCOAL_2 = '#211f1b'
+GOLD = '#d9b568'
+IVORY = '#f8f1e2'
+INK = '#1c1a17'
+MUTED = '#8a8172'
+
+CANVAS_WIDTH = 1024
+CANVAS_HEIGHT = 1024
+
+def find_font_file(candidates):
+    for c in candidates:
+        if os.path.exists(c):
+            return c
+    return None
+
+def load_font(name_key, size):
+    font_paths = {
+        'serif_bold': [
+            '/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf',
+            '/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf'
+        ],
+        'serif_regular': [
+            '/usr/share/fonts/truetype/liberation/LiberationSerif-Regular.ttf',
+            '/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf'
+        ],
+        'sans': [
+            '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf',
+            '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+        ],
+        'condensed': [
+            '/usr/share/fonts/truetype/noto/NotoSansDisplayCondensed-Regular.ttf',
+            '/usr/share/fonts/truetype/dejavu/DejaVuSansCondensed.ttf',
+            '/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf'
+        ]
+    }
+    candidates = font_paths.get(name_key, font_paths['sans'])
+    path = find_font_file(candidates)
+    if path:
+        try:
+            return ImageFont.truetype(path, size)
+        except Exception:
+            pass
+    return ImageFont.load_default()
+
+def region_colour(name):
+    return stories.REGIONS.get(name, GOLD)
+
+def gradient(draw, box, color1, color2, vertical=True):
+    x0, y0, x1, y1 = box
+    draw.rectangle([x0, y0, x1, y1], fill=color1)
+
+class Page:
+    def __init__(self, width=CANVAS_WIDTH, height=CANVAS_HEIGHT):
+        self.width = width
+        self.height = height
+        self.img = Image.new('RGB', (width, height), CREAM)
+        self.draw = ImageDraw.Draw(self.img)
+        self.boxes = []
+
+    def card_surface(self, x0, y0, x1, y1, fill):
+        self.draw.rectangle([x0, y0, x1, y1], fill=fill)
+
+    def card_outline(self, x0, y0, x1, y1, outline, width=1):
+        self.draw.rectangle([x0, y0, x1, y1], outline=outline, width=width)
+
+    def text(self, xy, text_str, font, fill, max_width=None, spacing=4):
+        x, y = xy
+        if not text_str:
+            return y
+        
+        words = text_str.split(' ')
+        lines = []
+        current_line = []
+        
+        for word in words:
+            test_line = ' '.join(current_line + [word]) if current_line else word
+            if max_width is not None:
+                bbox = self.draw.textbbox((0, 0), test_line, font=font)
+                w = bbox[2] - bbox[0]
+                if w > max_width and current_line:
+                    lines.append(' '.join(current_line))
+                    current_line = [word]
+                else:
+                    current_line.append(word)
+            else:
+                current_line.append(word)
+        if current_line:
+            lines.append(' '.join(current_line))
+
+        curr_y = y
+        for line in lines:
+            if not line:
+                continue
+            self.draw.text((x, curr_y), line, font=font, fill=fill)
+            bbox = self.draw.textbbox((x, curr_y), line, font=font)
+            self.boxes.append(bbox)
+            line_height = bbox[3] - bbox[1]
+            curr_y += line_height + spacing
+
+        return curr_y
+
+def self_check(page):
+    for idx, (x0, y0, x1, y1) in enumerate(page.boxes):
+        if x0 < 0 or y0 < 0 or x1 > page.width or y1 > page.height:
+            raise ValueError(f"Text box {idx} out of bounds: ({x0}, {y0}, {x1}, {y1}) in canvas {page.width}x{page.height}")
+
+    n = len(page.boxes)
+    for i in range(n):
+        ax0, ay0, ax1, ay1 = page.boxes[i]
+        for j in range(i + 1, n):
+            bx0, by0, bx1, by1 = page.boxes[j]
+            intersects = (ax0 < bx1 and ax1 > bx0 and ay0 < by1 and ay1 > by0)
+            if intersects:
+                a_in_b = (bx0 <= ax0 and ax1 <= bx1 and by0 <= ay0 and ay1 <= by1)
+                b_in_a = (ax0 <= bx0 and bx1 <= ax1 and ay0 <= by0 and by1 <= ay1)
+                if not (a_in_b or b_in_a):
+                    raise ValueError(f"Text box collision between box {i} {page.boxes[i]} and box {j} {page.boxes[j]}")
+
+def main():
+    page = Page()
+    self_check(page)
+    page.img.save('/home/hatch/workspace/makefun/entries/news-image-20261124-r1/entry.png')
+    print("entry.png saved successfully.")
+
+if __name__ == '__main__':
+    main()
