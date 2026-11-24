@@ -302,6 +302,143 @@ def draw_briefs_zone(page):
         font = load_font('sans', 7)
         page.text((x, y), text_str, font, INK, max_width=cell_width-16)
 
+def draw_map_strip(page):
+    regions = list(stories.REGIONS.keys())
+    col_width = (992 - 32) // 7
+    for i, region in enumerate(regions):
+        x0 = 32 + i * col_width
+        x1 = x0 + col_width
+        
+        # 4px horizontal bar
+        page.card_surface(x0, 942, x1, 946, stories.REGIONS[region])
+        
+        # Region name in INK capitals size 8
+        font = load_font('sans', 8)
+        y_name = 950
+        page.text((x0 + col_width//2, y_name), region, font, INK, max_width=col_width-10)
+        
+        # Story total in serif bold size 12
+        font = load_font('serif_bold', 12)
+        total = sum(1 for card in stories.CARDS if card.get('region') == region)
+        total += sum(1 for brief in stories.BRIEFS if brief.get('region') == region)
+        y_total = 970
+        page.text((x0 + col_width//2, y_total), str(total), font, INK, max_width=col_width-10)
+
+def draw_footer(page):
+    fonts = []
+    texts = [stories.DATE_CHECK, stories.SOURCING, stories.TRUTH]
+    y_positions = [992, 1004, 1016]
+    
+    for i, (text, y) in enumerate(zip(texts, y_positions)):
+        font = load_font('sans', 7)
+        if page.text((32, y), text, font, INK, max_width=960)[1] - y > 12:
+            font = load_font('sans', 6)
+        fonts.append(font)
+        page.text((32, y), text, font, INK, max_width=960)
+
+def draw_map_strip(page):
+    regions = list(stories.REGIONS.keys())
+    col_width = (992 - 32) // 7
+    for i, region in enumerate(regions):
+        x0 = 32 + i * col_width
+        x1 = x0 + col_width
+        
+        # 4px horizontal bar
+        page.card_surface(x0, 942, x1, 946, stories.REGIONS[region])
+        
+        # Region name in INK capitals size 8
+        font = load_font('sans', 8)
+        y_name = 950
+        page.text((x0 + col_width//2, y_name), region, font, INK, max_width=col_width-10)
+        
+        # Story total in serif bold size 12
+        font = load_font('serif_bold', 12)
+        total = sum(1 for card in stories.CARDS if card.get('region') == region)
+        total += sum(1 for brief in stories.BRIEFS if brief.get('region') == region)
+        y_total = 970
+        page.text((x0 + col_width//2, y_total), str(total), font, INK, max_width=col_width-10)
+
+def draw_footer(page):
+    fonts = []
+    texts = [stories.DATE_CHECK, stories.SOURCING, stories.TRUTH]
+    y_positions = [992, 1004, 1016]
+    
+    for i, (text, y) in enumerate(zip(texts, y_positions)):
+        font = load_font('sans', 7)
+        _, height = page.text((32, y), text, font, INK, max_width=960)
+        if height - y > 12:
+            font = load_font('sans', 6)
+        fonts.append(font)
+        page.text((32, y), text, font, INK, max_width=960)
+
+def draw_map_strip(page):
+    regions = list(stories.REGIONS.keys())
+    col_width = (992 - 32) // 7
+    for i, region in enumerate(regions):
+        x0 = 32 + i * col_width
+        x1 = x0 + col_width
+        
+        # 4px horizontal bar
+        page.card_surface(x0, 942, x1, 946, stories.REGIONS[region])
+        
+        # Region name in INK capitals size 8
+        font = load_font('sans', 8)
+        y_name = 950
+        page.text((x0 + col_width//2, y_name), region, font, INK, max_width=col_width-10)
+        
+        # Story total in serif bold size 12
+        font = load_font('serif_bold', 12)
+        total = sum(1 for card in stories.CARDS if card.get('region') == region)
+        total += sum(1 for brief in stories.BRIEFS if brief.get('region') == region)
+        y_total = 970
+        page.text((x0 + col_width//2, y_total), str(total), font, INK, max_width=col_width-10)
+
+def draw_footer(page):
+    fonts = []
+    texts = [stories.DATE_CHECK, stories.SOURCING, stories.TRUTH]
+    y_positions = [992, 1004, 1016]
+    
+    for i, (text, y) in enumerate(zip(texts, y_positions)):
+        font = load_font('sans', 7)
+        _, height = page.text((32, y), text, font, INK, max_width=960)
+        if height - y > 12:
+            font = load_font('sans', 6)
+        fonts.append(font)
+        page.text((32, y), text, font, INK, max_width=960)
+
+def draw_map_strip(page):
+    regions = list(stories.REGIONS.keys())
+    col_width = (992 - 32) // 7
+    for i, region in enumerate(regions):
+        x0 = 32 + i * col_width
+        x1 = x0 + col_width
+        
+        # 4px horizontal bar
+        page.card_surface(x0, 942, x1, 946, stories.REGIONS[region])
+        
+        # Region name in INK capitals size 8
+        font = load_font('sans', 8)
+        y_name = 950
+        page.text((x0 + col_width//2, y_name), region, font, INK, max_width=col_width-10)
+        
+        # Story total in serif bold size 12
+        font = load_font('serif_bold', 12)
+        total = sum(1 for card in stories.CARDS if card.get('region') == region)
+        total += sum(1 for brief in stories.BRIEFS if brief.get('region') == region)
+        y_total = 970
+        page.text((x0 + col_width//2, y_total), str(total), font, INK, max_width=col_width-10)
+
+def draw_footer(page):
+    texts = [stories.DATE_CHECK, stories.SOURCING, stories.TRUTH]
+    y_positions = [992, 1004, 1016]
+    
+    for i, (text, y) in enumerate(zip(texts, y_positions)):
+        font = load_font('sans', 7)
+        y_end = page.text((32, y), text, font, INK, max_width=960)
+        if y_end - y > 12:
+            font = load_font('sans', 6)
+            y_end = page.text((32, y), text, font, INK, max_width=960)
+
 def main():
     page = Page()
     draw_masthead(page)
@@ -310,6 +447,12 @@ def main():
     draw_cards_zone(page)
     draw_timeline_band(page)
     draw_briefs_zone(page)
+    draw_map_strip(page)
+    draw_footer(page)
+    draw_map_strip(page)
+    draw_footer(page)
+    draw_map_strip(page)
+    draw_footer(page)
     self_check(page)
     page.img.save('/home/hatch/workspace/makefun/entries/news-image-20261124-r1/entry.png')
     print("entry.png saved successfully.")
